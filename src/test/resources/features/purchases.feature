@@ -4,6 +4,34 @@ Feature: Purchases
   Background: Registration of a new user
     Given I'm on "LogInPage"
     And click on "//button[contains(@class,'id-register-button')]"
+
+  @RegistrationTest
+  Scenario: Check the registration of a new user
+    And check email field
+    And input random email
+    And click on "#continueRegistrationButton"
+    And check when all fields are empty
+    And choose Title
+    And input "Cucumber" in "#firstName"
+    And input "Onion" in "#lastName"
+    And choose Profession
+    And input "E1 6AN" in "#contact-search-postcode"
+    And check postcode section
+    And selects Address
+    And check password section
+    And input "OnionOnion2022" in "#password"
+    And input "OnionOnion2022" in "#retypePassword"
+    And selects Address
+    And wait a second
+    And click on "#registerNowButton"
+    And wait a second
+    And click on "//a[@class='btn btn--primary sm-fill btn--xl']"
+    Then the "#username-label" text equals to "Cucumber Onion"
+    And click on "//span[@class='TcRU9_ PO7_zG PLOsrp']"
+    And click on "//button[@class='DtE_nS noWGnz _oekPp _1f_Trd Y1shPH GGlJ0i A_hF8H']"
+
+  @ShoppingCartTest
+  Scenario: Check the shopping cart
     And input random email
     And click on "#continueRegistrationButton"
     And choose Title
@@ -17,15 +45,6 @@ Feature: Purchases
     And input "OnionOnion2022" in "#retypePassword"
     And click on "//button[@class='btn btn--primary fill btn--xl']"
     And click on "//a[contains(@class,'btn--primary sm-fill')]"
-
-  @RegistrationTest
-  Scenario: Check the registration of a new user
-    Then the "#username-label" text equals to "Cucumber Onion"
-    And click on "//span[@class='TcRU9_ PO7_zG PLOsrp']"
-    And click on "//button[@class='DtE_nS noWGnz _oekPp _1f_Trd Y1shPH GGlJ0i A_hF8H']"
-
-  @ShoppingCartTest
-  Scenario: Check the shopping cart
     When input "drills" in "#keyword-search"
     And click on "//button[@data-qaid='search-button']"
     And click on "//button[@class='DtE_nS UvZo21 Q_KHB7 bTqDYN']"

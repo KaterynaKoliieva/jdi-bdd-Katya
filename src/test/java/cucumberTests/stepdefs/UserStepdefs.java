@@ -1,11 +1,12 @@
 package cucumberTests.stepdefs;
 
 import cucumber.api.java.en.And;
+import io.github.com.entities.Contacts;
 import io.github.com.entities.Users;
 
 import java.util.Locale;
 
-import static io.github.com.entities.Users.randomEmail;
+import static io.github.com.entities.Users.*;
 import static io.github.com.pages.BasketPage.*;
 import static io.github.com.pages.RegistrationPage.*;
 import static org.junit.Assert.assertEquals;
@@ -42,6 +43,7 @@ public class UserStepdefs {
         int number = 2;
         selectAddressButton.get(number).click();
         Thread.sleep(2000);
+//        registerNow.click();
     }
 
     @And("^User checks if the Deliver button is selected for the first product$")
@@ -70,11 +72,93 @@ public class UserStepdefs {
                 Double.parseDouble(subTotalField.getText().replace("£", "")), 0.00);
     }
 
+    @And("^check email field$")
+    public void checkEmailField() throws InterruptedException {
+        String withoutAsperandEmail = EMAIL_WITHOUT_ASPERAND.email;
+        String registeredUser = DEFAULT_USER.email;
+
+        continueYourRegistration.click();
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("Please enter an email address"));
+
+        emailField.sendKeys(registeredUser);
+        continueYourRegistration.click();
+        Thread.sleep(1000);
+        assertTrue(infoboxText.getText().contains("Sorry, we cannot register you"));
+        emailField.clear();
+
+        Thread.sleep(1000);
+        emailField.sendKeys(withoutAsperandEmail);
+        continueYourRegistration.click();
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("Email address is missing the '@' symbol"));
+        emailField.clear();
+    }
+
     @And("^input random email$")
-    public void inputRandomEmail() {
+    public void inputRandomEmail() throws InterruptedException {
         String email = randomEmail();
-        //Allure.addAttachment("Email: ", email);
+        Thread.sleep(2000);
         emailField.sendKeys(email);
+    }
+
+    @And("^check when all fields are empty$")
+    public void checkWhenAllFieldsAreEmpty() throws InterruptedException {
+        Thread.sleep(1000);
+        registerNow.click();
+        Thread.sleep(1000);
+
+        assertTrue(messageErrorList.get(0).getText().contains("Please choose your title"));
+        assertTrue(messageErrorList.get(1).getText().contains("Please enter your first name"));
+        assertTrue(messageErrorList.get(2).getText().contains("Please enter your last name"));
+        assertTrue(messageErrorList.get(3).getText().contains("Please choose your profession"));
+        assertTrue(messageErrorList.get(4).getText().contains("Please enter a postcode"));
+        assertTrue(messageErrorList.get(5).getText().contains("not enough characters"));
+        assertTrue(messageErrorList.get(6).getText().contains("Please re-enter your password"));
+    }
+    @And("^wait a second$")
+    public void waitASecond() throws InterruptedException {
+        Thread.sleep(2000);
+    }
+
+    @And("^check postcode section$")
+    public void checkPostcodeSection() throws InterruptedException {
+        String password = Contacts.password;
+        passwordField.sendKeys(password);
+        retypePassword.sendKeys(password);
+        registerNow.click();
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("Please enter your address"));
+        findAddress.click();
+        registerNow.click();
+
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("Please enter your address"));
+    }
+
+    @And("^check password section$")
+    public void checkPasswordSection() throws InterruptedException {
+        passwordField.clear();
+        retypePassword.clear();
+
+        passwordField.sendKeys(passwordLessTnan8);
+        registerNow.click();
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("not enough characters"));
+        passwordField.clear();
+
+        passwordField.sendKeys(defaultPassword);
+        retypePassword.sendKeys(passwordLessTnan8);
+        registerNow.click();
+        Thread.sleep(1000);
+        assertTrue(messageError.getText().contains("Your passwords do not match, please try again"));
+        passwordField.clear();
+        retypePassword.clear();
+
+        passwordField.sendKeys(defaultPassword);
+        registerNow.click();
+        assertTrue(messageError.getText().contains("Please re-enter your password"));
+        passwordField.clear();
     }
 
 }
