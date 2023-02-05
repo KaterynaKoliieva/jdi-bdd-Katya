@@ -7,7 +7,9 @@ Feature: Authentication
 
   @LogInTest
   Scenario: Check the login of a registered user to the site
-    Then the "//span[@class='user-name']" text equals to "1660074366230cucumber 1660074366230cucumber"
+    And the "//span[@class='user-name']" text equals to "1660074366230cucumber 1660074366230cucumber"
+    And click on "//li[@class='acc']//span[@class='user-name']"
+    And click on "#header_link_sign_out"
 
   @LogOutTest
   Scenario: Check the logout of the registered user from the site

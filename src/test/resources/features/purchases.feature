@@ -3,7 +3,7 @@ Feature: Purchases
 
   Background: Registration of a new user
     Given I'm on "LogInPage"
-    When click on "//button[contains(@class,'id-register-button')]"
+    And click on "//button[contains(@class,'id-register-button')]"
     And input random email
     And click on "#continueRegistrationButton"
     And choose Title
@@ -20,22 +20,24 @@ Feature: Purchases
 
   @RegistrationTest
   Scenario: Check the registration of a new user
-    Then the "//span[@class='user-name']" text equals to "Cucumber Onion"
+    Then the "#username-label" text equals to "Cucumber Onion"
+    And click on "//span[@class='TcRU9_ PO7_zG PLOsrp']"
+    And click on "//button[@class='DtE_nS noWGnz _oekPp _1f_Trd Y1shPH GGlJ0i A_hF8H']"
 
   @ShoppingCartTest
   Scenario: Check the shopping cart
-    Given input "drills" in "#mainSearch-input"
-    And click on "#search_submit_button"
-    And click on "#product_add_button_412XT"
-    And click on "#continue_button_btn"
-    And click on "#add_for_collection_button_268FX"
-    And click on "#checkout_now"
+    When input "drills" in "#keyword-search"
+    And click on "//button[@data-qaid='search-button']"
+    And click on "//button[@class='DtE_nS UvZo21 Q_KHB7 bTqDYN']"
+    And click on "//button[@class='DtE_nS UvZo21 RgZO2i Y1shPH qidZSw JYOZmb']"
+    And click on "//button[@class='DtE_nS UvZo21 Q_KHB7 a3MLfX']"
+    And click on "//button[@class='DtE_nS noWGnz RgZO2i Y1shPH qidZSw JYOZmb']"
 #    And input "BA22 8RT" in "#search_branch_textbox"
 #    And click on "#search_branch_button"
 #    And click on "#add_for_collection_button_1"
 #    And click on "//button[@class='lb-btn-cancel']"
 #    And click on "//a[@href='/jsp/trolley/trolleyPage.jsp?reprice=true']"
-    And User checks if the Delivery button is selected for the first product
+    And User checks if the Deliver button is selected for the first product
     And User checks if the Click And Collect button is selected for the second product
     And User checks Sub Total Field
     And the "#trolley_page_delivery" text equals to "FREE"

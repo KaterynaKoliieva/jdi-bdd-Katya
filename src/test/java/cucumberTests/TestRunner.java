@@ -5,9 +5,7 @@ import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import io.github.com.StaticSite;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
@@ -22,11 +20,11 @@ import static io.github.com.pages.LoginPageFrame.acceptCookiesButton;
 @CucumberOptions(
     features = "classpath:features",
         glue = {"com.epam.jdi.bdd", "cucumberTests"},
+        plugin = {"pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm"},
         tags = "@LogInTest, @LogOutTest, @RegistrationTest, @ShoppingCartTest"
 )
 
 public class TestRunner {
-
     @BeforeClass
     public static void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
@@ -40,5 +38,4 @@ public class TestRunner {
     public static void shutDown() {
         killAllSeleniumDrivers();
     }
-
 }
