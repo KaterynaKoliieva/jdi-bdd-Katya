@@ -31,12 +31,12 @@ Feature: Purchases
     And click on "//button[@class='DtE_nS UvZo21 Q_KHB7 bTqDYN']"
     And click on "//button[@class='DtE_nS UvZo21 RgZO2i Y1shPH qidZSw JYOZmb']"
     And click on "//button[@class='DtE_nS UvZo21 Q_KHB7 a3MLfX']"
-    And click on "//button[@class='DtE_nS noWGnz RgZO2i Y1shPH qidZSw JYOZmb']"
-#    And input "BA22 8RT" in "#search_branch_textbox"
-#    And click on "#search_branch_button"
-#    And click on "#add_for_collection_button_1"
-#    And click on "//button[@class='lb-btn-cancel']"
-#    And click on "//a[@href='/jsp/trolley/trolleyPage.jsp?reprice=true']"
+#    And click on "//button[@class='DtE_nS noWGnz RgZO2i Y1shPH qidZSw JYOZmb']"
+    And input "BA22 8RT" in "#search_branch_textbox"
+    And click on "#search_branch_button"
+    And click on "#add_for_collection_button_1"
+    And click on "//button[@class='lb-btn-cancel']"
+    And click on "//a[@href='/jsp/trolley/trolleyPage.jsp?reprice=true']"
     And User checks if the Deliver button is selected for the first product
     And User checks if the Click And Collect button is selected for the second product
     And User checks Sub Total Field
