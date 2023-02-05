@@ -41,6 +41,7 @@ public class UserStepdefs {
 //        int rndNumber = randomNumber(selectAddressButton.size());
         int number = 2;
         selectAddressButton.get(number).click();
+        Thread.sleep(2000);
     }
 
     @And("^User checks if the Deliver button is selected for the first product$")
